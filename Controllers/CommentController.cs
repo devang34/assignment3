@@ -20,10 +20,11 @@ namespace assignment3.Controllers
         }
 
         // GET: Comment
-        public async Task<IActionResult> Index()
-        {
-            return View(await _context.Comment.ToListAsync());
-        }
+         public async Task<IActionResult> Index()
+{
+    var comment = await _context.Comment.ToListAsync();
+    return Json(comment);
+}
 
         // GET: Comment/Details/5
         public async Task<IActionResult> Details(int? id)

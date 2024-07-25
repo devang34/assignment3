@@ -20,10 +20,11 @@ namespace assignment3.Controllers
         }
 
         // GET: Cart
-        public async Task<IActionResult> Index()
-        {
-            return View(await _context.Items.ToListAsync());
-        }
+         public async Task<IActionResult> Index()
+{
+    var cart = await _context.Items.ToListAsync();
+    return Json(cart);
+}
 
         // GET: Cart/Details/5
         public async Task<IActionResult> Details(int? id)
