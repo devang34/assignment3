@@ -55,15 +55,15 @@ namespace assignment3.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,product_id,user_id,rating,images,comment")] Comment comment)
+        public async Task<IActionResult> Create([Bind("Id,product_id,user_id,rating,images,comment")] Comment comments)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(comment);
+                _context.Add(comments);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(comment);
+            return View(comments);
         }
 
         // GET: Comment/Edit/5
@@ -74,12 +74,12 @@ namespace assignment3.Controllers
                 return NotFound();
             }
 
-            var comment = await _context.Comment.FindAsync(id);
-            if (comment == null)
+            var comments = await _context.Comment.FindAsync(id);
+            if (comments == null)
             {
                 return NotFound();
             }
-            return View(comment);
+            return View(comments);
         }
 
         // POST: Comment/Edit/5
@@ -87,9 +87,9 @@ namespace assignment3.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,product_id,user_id,rating,images,comment")] Comment comment)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,product_id,user_id,rating,images,comment")] Comment comments)
         {
-            if (id != comment.Id)
+            if (id != comments.Id)
             {
                 return NotFound();
             }
@@ -98,12 +98,12 @@ namespace assignment3.Controllers
             {
                 try
                 {
-                    _context.Update(comment);
+                    _context.Update(comments);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CommentExists(comment.Id))
+                    if (!CommentExists(comments.Id))
                     {
                         return NotFound();
                     }
@@ -114,7 +114,7 @@ namespace assignment3.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(comment);
+            return View(comments);
         }
 
         // GET: Comment/Delete/5
